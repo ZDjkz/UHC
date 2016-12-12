@@ -28,8 +28,8 @@ public class PreGameEvents implements Listener {
 
             } else {
                 if (!(e.getTo().getPitch() != e.getFrom().getPitch() && e.getFrom().getX() == e.getTo().getX() && e.getFrom().getZ() == e.getTo().getZ())){
-                    e.setCancelled(true);
                     if (!(UHC.PlayerData.get(p.getName()) == "WAIT")){
+                        p.teleport(old);
                         p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&c&oSorry, you can't move yet."));
                         UHC.PlayerData.put(p.getName(), "WAIT");
                         clearWait(p);

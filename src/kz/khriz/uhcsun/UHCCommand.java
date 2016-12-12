@@ -2,6 +2,7 @@ package kz.khriz.uhcsun;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -84,6 +85,12 @@ public class UHCCommand implements CommandExecutor {
             }
 
             if (args.length == 2){
+                if (args[0].equalsIgnoreCase("Debug")){
+                    if (args[1].equalsIgnoreCase("rl") || args[1].equalsIgnoreCase("randomlocation") || args[1].equalsIgnoreCase("rlocation")  || args[1].equalsIgnoreCase("randoml")){
+                        Location rl = UHC.UTIL.newRandomLoc(p.getLocation().getWorld().toString(), 1000, 100, 1000, 100,156, 60);
+                        p.teleport(rl);
+                    }
+                }
                 if (args[0].equalsIgnoreCase("Lobby")){
                     if (args[1].equalsIgnoreCase("Set")){
                         p.sendMessage(UHC.PREFIX + ChatColor.translateAlternateColorCodes('&', "&9&oSet UHC Lobby to Your Location"));

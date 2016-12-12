@@ -188,6 +188,10 @@ public class Utilities {
         Location teleportLoc = null;
         Location teleportLoca1 = null;
         Location teleportLoca2 = null;
+        Location teleportLocb2 = null;
+        Location teleportLocb1 = null;
+        Location teleportLocb3 = null;
+
 
         World World = Bukkit.getWorld(world);
         int x = random.nextInt((paraXMax - paraXMin) + 1) + paraXMin;
@@ -195,6 +199,9 @@ public class Utilities {
         int y = maxY;
         boolean land = false;
         while (land == false){
+            teleportLocb3 = new Location(World, x + 0.5, y - 2, z + 0.5);
+            teleportLocb2 = new Location(World, x + 0.5, y - 1, z + 0.5);
+            teleportLocb1 = new Location(World, x + 0.5, y, z + 0.5);
             teleportLoc = new Location(World, x + 0.5, y + 1, z + 0.5);
             teleportLoca1 = new Location(World, x + 0.5, y + 2, z + 0.5);
             teleportLoca2 = new Location(World, x + 0.5, y + 3, z + 0.5);
@@ -202,12 +209,29 @@ public class Utilities {
             if (teleportLoc.getBlock().getType() != org.bukkit.Material.AIR
                     && teleportLoca1.getBlock().getType() == org.bukkit.Material.AIR
                     && teleportLoca2.getBlock().getType() == org.bukkit.Material.AIR ){
-                land = true;
-                for (Player p : Bukkit.getOnlinePlayers()){
-                    p.sendMessage(ChatColor.translateAlternateColorCodes('&',"&a&lFound location."));
+                if (teleportLoc.getBlock().getType() != org.bukkit.Material.STATIONARY_WATER
+                        && teleportLocb1.getBlock().getType() != org.bukkit.Material.STATIONARY_WATER
+                        && teleportLocb2.getBlock().getType() != org.bukkit.Material.STATIONARY_WATER
+                        && teleportLocb3.getBlock().getType() != org.bukkit.Material.STATIONARY_WATER
+                        && teleportLoca1.getBlock().getType() != org.bukkit.Material.STATIONARY_WATER
+                        && teleportLoca2.getBlock().getType() != org.bukkit.Material.STATIONARY_WATER){
+                    land = true;
+                    // Found safe location!
+                    for (Player p : Bukkit.getOnlinePlayers()){
+                        p.sendMessage(ChatColor.translateAlternateColorCodes('&',"&a&lFound location."));
+                    }
+                } else {
+                    // Found water, randomizing again...
+                    y = maxY;
+                    x = random.nextInt((paraXMax - paraXMin) + 1) + paraXMin;
+                    z = random.nextInt((paraZMax - paraZMin) + 1) + paraZMin;
+                    for (Player p : Bukkit.getOnlinePlayers()){
+                        p.sendMessage(ChatColor.translateAlternateColorCodes('&',"&c&oFound water - Rolling Dice."));
+                    }
                 }
             } else {
                 if (y <= minY){
+                    // Could not find a safe location within given parameters.
                     y = maxY;
                     x = random.nextInt((paraXMax - paraXMin) + 1) + paraXMin;
                     z = random.nextInt((paraZMax - paraZMin) + 1) + paraZMin;
@@ -215,12 +239,13 @@ public class Utilities {
                         p.sendMessage(ChatColor.translateAlternateColorCodes('&',"&c&oNo Safe Land - Rolling Dice."));
                     }
                 } else {
+                    // Y Axis to High, Lowing Y.
                     y--;
                 }
             }
         }
 
-        Location Spawn = new Location(World, x + 0.5, y + 2, z + 0.5 );
+        Location Spawn = new Location(World, x + 0.5, y + 1, z + 0.5 );
 
         return Spawn;
     }
