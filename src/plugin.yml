@@ -1,0 +1,12 @@
+name: UHC
+main: kz.khriz.uhcsun.UHC
+description: UHC
+author: Khriz
+prefix: UHC
+version: 0.1
+commands:
+   UHC:
+      description: UHC Main Command
+      usage: /<command>
+      permission-message: No access, sorry.
+      aliases: [l]
