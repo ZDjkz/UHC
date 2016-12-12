@@ -86,9 +86,9 @@ public class UHCCommand implements CommandExecutor {
 
             if (args.length == 2){
                 if (args[0].equalsIgnoreCase("Debug")){
-                    if (args[1].equalsIgnoreCase("rl") || args[1].equalsIgnoreCase("randomlocation") || args[1].equalsIgnoreCase("rlocation")  || args[1].equalsIgnoreCase("randoml")){
-                        Location rl = UHC.UTIL.newRandomLoc(p.getLocation().getWorld().toString(), 1000, 100, 1000, 100,156, 60);
-                        p.teleport(rl);
+                    if (args[1].equalsIgnoreCase("rl")){
+                        Location Spawn = UHC.rl();
+                        p.teleport(Spawn);
                     }
                 }
                 if (args[0].equalsIgnoreCase("Lobby")){
