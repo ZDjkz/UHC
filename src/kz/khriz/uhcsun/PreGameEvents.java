@@ -21,16 +21,19 @@ public class PreGameEvents implements Listener {
     public void preGameMovement(PlayerMoveEvent e){
         Player p = e.getPlayer();
         Location old = e.getFrom();
+        old.setPitch(p.getLocation().getPitch());
+        old.setYaw(p.getLocation().getYaw());
         if (UHC.Game.get("PREGAME") == "TRUE"){
             if (p.getFallDistance() > 0){
 
             } else {
-                e.setCancelled(true);
+                if (!(e.getTo().getPitch() != e.getFrom().getPitch() && e.getFrom().getX() == e.getTo().getX() && e.getFrom().getZ() == e.getTo().getZ())){
+                    e.setCancelled(true);
+                }
                 if (!(UHC.PlayerData.get(p.getName()) == "WAIT")){
                     p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&c&oSorry, you can't move yet."));
                     UHC.PlayerData.put(p.getName(), "WAIT");
                     clearWait(p);
-                    p.teleport(old);
                 }
             }
         }

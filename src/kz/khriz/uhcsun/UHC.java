@@ -13,12 +13,13 @@ import net.md_5.bungee.api.ChatColor;
 
 public class UHC extends JavaPlugin {
 
+    //This is the API, You should'nt have to use this.
     APILoad API = new APILoad(this);
-
+    //This is Utilities.java allowing for easy access between classes and use of methods in there.
     Utilities UTIL = new Utilities(this);
-
+    //This is the FileRegistry to save and access files. "UHC.FILE.get("<INSERT NAME>");
     FileRegistry FILE = new FileRegistry(this);
-
+    //Here is the UHC Prefix.
     public String PREFIX = ChatColor.translateAlternateColorCodes('&', "&c&lU&6&lH&e&lC &e&lS&6&lU&c&lN &f&o- ");
 
     @Override
@@ -47,6 +48,11 @@ public class UHC extends JavaPlugin {
         UTIL.defaultConfig();
     }
 
+    // Here are the Current Hash Maps.
+    // Player Data is for the Amount of say coins and custom crafting recipies they used.
+    // Game is all the Game data we use for knowing what events to register.
+    // DamageMap for the amount of damage a player dealt to another player
+    // DamageTook is the amount of damage a single player has took in total.
     HashMap<Object, Object> PlayerData = new HashMap<Object, Object>();
     HashMap<Object, Object> Game = new HashMap<Object, Object>();
     HashMap<Object, Double> DamageMap = new HashMap<Object, Double>();
@@ -55,6 +61,7 @@ public class UHC extends JavaPlugin {
     public void setGame(){
         Game.put("NAME", UTIL.getHour());
         Game.put("GAME ID", Config.getInt("GAMES") + 1);
+        Game.put("PVP", "DISABLED");
 
         UTIL.startGame();
     }

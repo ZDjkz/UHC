@@ -70,6 +70,17 @@ public class Utilities {
         UHC.FILE.Border.set("worlds.UHC.wrapping", false);
         UHC.FILE.saveBorder();
         setupGame();
+
+        Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(kz.khriz.uhcsun.UHC.getPlugin(UHC.class), new Runnable() {
+
+            @Override
+            public void run() {
+                UHC.Game.put("PVP", "ENABLED");
+                Bukkit.getServer().broadcastMessage(UHC.PREFIX + ChatColor.translateAlternateColorCodes('&',"&c&lPVP Has Been Enabled."));
+            }
+
+        }, (((15)) * 20));
+
     }
 
     public void shrinkBorder(int Amount){
@@ -129,7 +140,7 @@ public class Utilities {
                 p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&a&oTIP &9&l- &a&lDon't take fall damage. You can't regen."));
                 p.sendMessage("");
             }
-        }, ((10)) * 20);
+        }, ((9)) * 20);
     }
 
     public void setupGame(){
@@ -174,6 +185,7 @@ public class Utilities {
         }, 11 * 20);
     }
 
+    //This get's a new random location in the world between the stated parameters.
     public Location newRandomLoc(){
         Random random = new Random();
         World UHCWorld = Bukkit.getWorld("UHC");
@@ -181,9 +193,22 @@ public class Utilities {
         int z = random.nextInt((900 - 100) + 1) + 100;
         int y = UHCWorld.getHighestBlockAt(x, z).getY();
 
-        Location Spawn = new Location(UHCWorld, x + 0.5, y , z + 0.5);
+        Location Spawn = new Location(UHCWorld, x + 0.5, y + 0.5, z + 0.5);
+        Location At = new Location(UHCWorld, x, y, z );
+        Location Under = new Location(UHCWorld, x, y -1, z );
+        Location UnderMore = new Location(UHCWorld, x, y -2, z );
 
+        // All of these if statements are to ensure that the player does not spawn in or above lava/water.
         if (Spawn.getBlock() == Material.WATER || Spawn.getBlock() == Material.LAVA){
+            Spawn = newRandomLoc();
+        }
+        if (At.getBlock() == Material.WATER || At.getBlock() == Material.LAVA){
+            Spawn = newRandomLoc();
+        }
+        if (Under.getBlock() == Material.WATER || Under.getBlock() == Material.LAVA){
+            Spawn = newRandomLoc();
+        }
+        if (UnderMore.getBlock() == Material.WATER || UnderMore.getBlock() == Material.LAVA){
             Spawn = newRandomLoc();
         }
 

@@ -92,6 +92,7 @@ public class GameEvents implements Listener {
     public void DamageEvent(EntityDamageByEntityEvent e){
         if (!(e.getEntity() instanceof Player)) return;
         if (!(e.getDamager() instanceof Player)) return;
+        if (UHC.Game.get("PVP") == "DISABLED") return;
         if (UHC.Game.get("STARTED") == "FINISHED"){
             e.setCancelled(true);
             return;

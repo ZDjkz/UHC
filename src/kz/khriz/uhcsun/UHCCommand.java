@@ -31,7 +31,7 @@ public class UHCCommand implements CommandExecutor {
                     if (!UHC.Game.containsKey("NAME")){
                         if (UHC.Config.getBoolean("Lobby.Active")){
                             int PlayerCount = Bukkit.getOnlinePlayers().size();
-                            if (PlayerCount >= 3){
+                            if (PlayerCount >= 1){
                                 UHC.Config.set("GAMES", UHC.Config.getInt("GAMES") + 1);
                                 UHC.SaveConfig();
                                 UHC.setGame();
