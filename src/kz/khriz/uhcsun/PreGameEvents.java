@@ -29,11 +29,11 @@ public class PreGameEvents implements Listener {
             } else {
                 if (!(e.getTo().getPitch() != e.getFrom().getPitch() && e.getFrom().getX() == e.getTo().getX() && e.getFrom().getZ() == e.getTo().getZ())){
                     e.setCancelled(true);
-                }
-                if (!(UHC.PlayerData.get(p.getName()) == "WAIT")){
-                    p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&c&oSorry, you can't move yet."));
-                    UHC.PlayerData.put(p.getName(), "WAIT");
-                    clearWait(p);
+                    if (!(UHC.PlayerData.get(p.getName()) == "WAIT")){
+                        p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&c&oSorry, you can't move yet."));
+                        UHC.PlayerData.put(p.getName(), "WAIT");
+                        clearWait(p);
+                    }
                 }
             }
         }
@@ -59,7 +59,7 @@ public class PreGameEvents implements Listener {
             public void run() {
                 UHC.PlayerData.remove(p.getName());
             }
-        }, ((1)) * 20);
+        }, (((long) 2.5)) * 20);
     }
 
 }

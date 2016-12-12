@@ -2,19 +2,18 @@ package kz.khriz.uhcsun;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Random;
+import java.util.*;
 
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.Location;
-import org.bukkit.World;
+import org.bukkit.*;
+import org.bukkit.block.*;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.generator.ChunkGenerator;
 
 import net.minecraft.server.v1_8_R1.Material;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.metadata.MetadataValue;
+import org.bukkit.plugin.Plugin;
 
 public class Utilities {
 
@@ -62,6 +61,7 @@ public class Utilities {
 
     public void startGame(){
         Bukkit.getServer().dispatchCommand(Bukkit.getServer().getConsoleSender(), "mv create UHC normal -g UHC");
+        Bukkit.getServer().dispatchCommand(Bukkit.getServer().getConsoleSender(), "mv load UHC");
 
         UHC.FILE.Border.set("worlds.UHC.radiusX", 1000);
         UHC.FILE.Border.set("worlds.UHC.radiusZ", 1000);
@@ -79,7 +79,7 @@ public class Utilities {
                 Bukkit.getServer().broadcastMessage(UHC.PREFIX + ChatColor.translateAlternateColorCodes('&',"&c&lPVP Has Been Enabled."));
             }
 
-        }, (((15)) * 20));
+        }, (((15 * 2)) * 20));
 
     }
 
@@ -121,7 +121,7 @@ public class Utilities {
 
             @Override
             public void run() {
-                p.sendMessage(UHC.PREFIX + ChatColor.translateAlternateColorCodes('&', "&6&oThe game will begin in &c&l" + 1 + "&6&o seconds."));
+                p.sendMessage(UHC.PREFIX + ChatColor.translateAlternateColorCodes('&', "&6&oThe game will begin in &c&l" + 1 + "&6&o second."));
             }
         }, ((9)) * 20);
 
@@ -140,7 +140,7 @@ public class Utilities {
                 p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&a&oTIP &9&l- &a&lDon't take fall damage. You can't regen."));
                 p.sendMessage("");
             }
-        }, ((9)) * 20);
+        }, ((10)) * 20);
     }
 
     public void setupGame(){
@@ -152,11 +152,7 @@ public class Utilities {
             @Override
             public void run() {
                 for (Player online : Bukkit.getOnlinePlayers()){
-                    Location Spawn = newRandomLoc();
-
-                    if (Spawn.getBlock() == Material.WATER || Spawn.getBlock() == Material.LAVA){
-                        Spawn = newRandomLoc();
-                    }
+                    Location Spawn = newRandomLoc("UHC", 1000, 100, 1000, 100, 156, 60);
                     online.teleport(Spawn);
 
                     online.sendMessage(UHC.PREFIX + ChatColor.translateAlternateColorCodes('&', "&6&oThe game will begin in &2&l10&6&o seconds."));
@@ -186,31 +182,45 @@ public class Utilities {
     }
 
     //This get's a new random location in the world between the stated parameters.
-    public Location newRandomLoc(){
+    @SuppressWarnings("deprecation")
+    public Location newRandomLoc(String world, int paraXMax, int paraXMin, int paraZMax, int paraZMin, int maxY, int minY){
         Random random = new Random();
-        World UHCWorld = Bukkit.getWorld("UHC");
-        int x = random.nextInt((900 - 100) + 1) + 100;
-        int z = random.nextInt((900 - 100) + 1) + 100;
-        int y = UHCWorld.getHighestBlockAt(x, z).getY();
+        Location teleportLoc = null;
+        Location teleportLoca1 = null;
+        Location teleportLoca2 = null;
 
-        Location Spawn = new Location(UHCWorld, x + 0.5, y + 0.5, z + 0.5);
-        Location At = new Location(UHCWorld, x, y, z );
-        Location Under = new Location(UHCWorld, x, y -1, z );
-        Location UnderMore = new Location(UHCWorld, x, y -2, z );
+        World World = Bukkit.getWorld(world);
+        int x = random.nextInt((paraXMax - paraXMin) + 1) + paraXMin;
+        int z = random.nextInt((paraZMax - paraZMin) + 1) + paraZMin;
+        int y = maxY;
+        boolean land = false;
+        while (land == false){
+            teleportLoc = new Location(World, x + 0.5, y + 1, z + 0.5);
+            teleportLoca1 = new Location(World, x + 0.5, y + 2, z + 0.5);
+            teleportLoca2 = new Location(World, x + 0.5, y + 3, z + 0.5);
 
-        // All of these if statements are to ensure that the player does not spawn in or above lava/water.
-        if (Spawn.getBlock() == Material.WATER || Spawn.getBlock() == Material.LAVA){
-            Spawn = newRandomLoc();
+            if (teleportLoc.getBlock().getType() != org.bukkit.Material.AIR
+                    && teleportLoca1.getBlock().getType() == org.bukkit.Material.AIR
+                    && teleportLoca2.getBlock().getType() == org.bukkit.Material.AIR ){
+                land = true;
+                for (Player p : Bukkit.getOnlinePlayers()){
+                    p.sendMessage(ChatColor.translateAlternateColorCodes('&',"&a&lFound location."));
+                }
+            } else {
+                if (y <= minY){
+                    y = maxY;
+                    x = random.nextInt((paraXMax - paraXMin) + 1) + paraXMin;
+                    z = random.nextInt((paraZMax - paraZMin) + 1) + paraZMin;
+                    for (Player p : Bukkit.getOnlinePlayers()){
+                        p.sendMessage(ChatColor.translateAlternateColorCodes('&',"&c&oNo Safe Land - Rolling Dice."));
+                    }
+                } else {
+                    y--;
+                }
+            }
         }
-        if (At.getBlock() == Material.WATER || At.getBlock() == Material.LAVA){
-            Spawn = newRandomLoc();
-        }
-        if (Under.getBlock() == Material.WATER || Under.getBlock() == Material.LAVA){
-            Spawn = newRandomLoc();
-        }
-        if (UnderMore.getBlock() == Material.WATER || UnderMore.getBlock() == Material.LAVA){
-            Spawn = newRandomLoc();
-        }
+
+        Location Spawn = new Location(World, x + 0.5, y + 2, z + 0.5 );
 
         return Spawn;
     }

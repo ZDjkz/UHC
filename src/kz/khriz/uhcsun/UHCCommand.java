@@ -42,7 +42,14 @@ public class UHCCommand implements CommandExecutor {
                                 p.sendMessage(UHC.PREFIX + ChatColor.translateAlternateColorCodes('&', "&6&oGame ID > " + id));
                                 p.sendMessage(UHC.PREFIX + ChatColor.translateAlternateColorCodes('&', "&6&oGame NAME > " + name));
 
-                                UHC.Game.put("PREGAME", "TRUE");
+                                Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(kz.khriz.uhcsun.UHC.getPlugin(UHC.class), new Runnable() {
+
+                                    @Override
+                                    public void run() {
+                                        UHC.Game.put("PREGAME", "TRUE");
+                                    }
+                                }, (long) 1.5 * 20);
+
                             } else {
                                 p.sendMessage(UHC.PREFIX + ChatColor.translateAlternateColorCodes('&', "&c&oSorry there's not enough players online to Start a Game"));
                             }
