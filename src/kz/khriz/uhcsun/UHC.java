@@ -50,7 +50,8 @@ public class UHC extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new LobbyEvents(this), this);
         getServer().getPluginManager().registerEvents(new PreGameEvents(this), this);
         getServer().getPluginManager().registerEvents(new GameEvents(this), this);
-        getServer().getPluginManager().registerEvents(new GameEvents(this), this);
+        getServer().getPluginManager().registerEvents(new UHCRecipes(this), this);
+        getServer().getPluginManager().registerEvents(new UHCScoreboard(this), this);
 
         UTIL.defaultConfig();
     }
