@@ -90,6 +90,9 @@ public class UHCCommand implements CommandExecutor {
                         Location Spawn = UHC.rl();
                         p.teleport(Spawn);
                     }
+                    if (args[1].equalsIgnoreCase("sb")){
+                        UHC.SCOREBOARD.startUHCGameBoard(p);
+                    }
                 }
                 if (args[0].equalsIgnoreCase("Lobby")){
                     if (args[1].equalsIgnoreCase("Set")){

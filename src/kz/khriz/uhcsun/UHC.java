@@ -57,8 +57,7 @@ public class UHC extends JavaPlugin {
     }
 
     public Location rl(){
-        Location Spawn = UTIL.newRandomLoc("UHC", 1000, 100, 1000, 100, 112, 60, true);
-
+        Location Spawn = UTIL.newRandomLoc("UHC", 1000, 100, 1000, 100, 156, 60, true);
         return Spawn;
     }
 
