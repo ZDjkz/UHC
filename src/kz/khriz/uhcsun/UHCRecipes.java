@@ -1,6 +1,8 @@
 package kz.khriz.uhcsun;
 
-public class UHCRecipes {
+import org.bukkit.event.Listener;
+
+public class UHCRecipes implements Listener {
 
     UHC UHC;
     public UHCRecipes(UHC instance) {
