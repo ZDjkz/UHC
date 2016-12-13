@@ -20,8 +20,13 @@ public class UHC extends JavaPlugin {
     Utilities UTIL = new Utilities(this);
     //This is the FileRegistry to save and access files. "UHC.FILE.get("<INSERT NAME>");
     FileRegistry FILE = new FileRegistry(this);
+    // This is the Scoreboard functions
+    UHCScoreboard SCOREBOARD = new UHCScoreboard(this);
+    // This is the Scoreboard functions
+    UHCRecipes RECIPES = new UHCRecipes(this);
     //Here is the UHC Prefix.
     public String PREFIX = ChatColor.translateAlternateColorCodes('&', "&c&lU&6&lH&e&lC &e&lS&6&lU&c&lN &f&o- ");
+
 
     @Override
     public void onEnable() {
@@ -45,6 +50,7 @@ public class UHC extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new LobbyEvents(this), this);
         getServer().getPluginManager().registerEvents(new PreGameEvents(this), this);
         getServer().getPluginManager().registerEvents(new GameEvents(this), this);
+        getServer().getPluginManager().registerEvents(new GameEvents(this), this);
 
         UTIL.defaultConfig();
     }
@@ -64,6 +70,8 @@ public class UHC extends JavaPlugin {
     HashMap<Object, Object> Game = new HashMap<Object, Object>();
     HashMap<Object, Double> DamageMap = new HashMap<Object, Double>();
     HashMap<Object, Double> DamageTook = new HashMap<Object, Double>();
+    HashMap<Object, Location> userTPLocs = new HashMap<Object, Location>();
+    HashMap<Object, Integer> recipeUseage = new HashMap<Object, Integer>();
 
     public void setGame(){
         Game.put("NAME", UTIL.getHour());

@@ -5,6 +5,8 @@ import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 
@@ -20,22 +22,36 @@ public class PreGameEvents implements Listener {
     @EventHandler
     public void preGameMovement(PlayerMoveEvent e){
         Player p = e.getPlayer();
-        Location old = e.getFrom();
-        old.setPitch(p.getLocation().getPitch());
-        old.setYaw(p.getLocation().getYaw());
+        Location userTPLocation = UHC.userTPLocs.get(p.getName());
         if (UHC.Game.get("PREGAME") == "TRUE"){
-            if (p.getFallDistance() > 0){
-
-            } else {
-                if (!(e.getTo().getPitch() != e.getFrom().getPitch() && e.getFrom().getX() == e.getTo().getX() && e.getFrom().getZ() == e.getTo().getZ())){
-                    if (!(UHC.PlayerData.get(p.getName()) == "WAIT")){
-                        p.teleport(old);
-                        p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&c&oSorry, you can't move yet."));
-                        UHC.PlayerData.put(p.getName(), "WAIT");
-                        clearWait(p);
+                if (e.getFrom().getX() != e.getTo().getX() && e.getFrom().getZ() != e.getTo().getZ()){
+                    if (e.getFrom().getPitch() != e.getTo().getPitch() || e.getFrom().getYaw() != e.getTo().getYaw()){
+                        userTPLocation.setPitch(e.getTo().getPitch());
+                        userTPLocation.setYaw(e.getTo().getYaw());
+                        p.teleport(userTPLocation);
+                    } else {
+                        p.teleport(userTPLocation);
+                        if (!(UHC.PlayerData.get(p.getName()) == "WAIT")){
+                            p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&c&oSorry, you can't move yet."));
+                            UHC.PlayerData.put(p.getName(), "WAIT");
+                            clearWait(p);
+                        }
                     }
                 }
-            }
+        }
+    }
+
+    @EventHandler
+    public void disableDamage(EntityDamageEvent e){
+        if (UHC.Game.get("PREGAME") == "TRUE"){
+            e.setCancelled(true);
+        }
+    }
+
+    @EventHandler
+    public void disableE2EDamage(EntityDamageByEntityEvent e){
+        if (UHC.Game.get("PREGAME") == "TRUE"){
+            e.setCancelled(true);
         }
     }
 

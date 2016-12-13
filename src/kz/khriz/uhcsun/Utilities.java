@@ -154,6 +154,7 @@ public class Utilities {
                 for (Player online : Bukkit.getOnlinePlayers()){
                     Location Spawn = newRandomLoc("UHC", 1000, 100, 1000, 100, 156, 60, false);
                     online.teleport(Spawn);
+                    UHC.userTPLocs.put(online.getName(), Spawn);
 
                     online.sendMessage(UHC.PREFIX + ChatColor.translateAlternateColorCodes('&', "&6&oThe game will begin in &2&l10&6&o seconds."));
                     chatTimer(online);
@@ -223,11 +224,13 @@ public class Utilities {
                     // Found safe location!
                     if (deBug) {
                         for (Player p : Bukkit.getOnlinePlayers()) {
-                            int both = noSafe + foundWater;
-                            p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&6&oFound Safe Location. &f&o-Found Water &b&o" + foundWater + " &f&oTime(s)."));
+                            int both = noSafe + foundWater + 1;
+                            p.sendMessage("");
+                            p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&6&lFound Safe Location. &c&oTried &f&o" + both + " &f&oTime(s)."));
+                            p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&f&o-Found Water &b&o" + foundWater + " &f&oTime(s)."));
                             p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&f&o-No Safe Land &b&o" + noSafe + " &f&oTime(s)."));
-                            p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&6&oTotal Tries. &f&o-Total &b&o" + both + " &f&oTime(s).    &f&o-Y Axis Lowered &b&o" + yAxis));
-
+                            p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&f&o-Y Axis Lowered &b&o" + yAxis + " &f&oTimes(s)"));
+                            p.sendMessage("");
                         }
                     }
                 } else {
