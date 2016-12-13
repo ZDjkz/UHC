@@ -152,7 +152,7 @@ public class Utilities {
             @Override
             public void run() {
                 for (Player online : Bukkit.getOnlinePlayers()){
-                    Location Spawn = newRandomLoc("UHC", 1000, 100, 1000, 100, 156, 60);
+                    Location Spawn = newRandomLoc("UHC", 1000, 100, 1000, 100, 156, 60, false);
                     online.teleport(Spawn);
 
                     online.sendMessage(UHC.PREFIX + ChatColor.translateAlternateColorCodes('&', "&6&oThe game will begin in &2&l10&6&o seconds."));
@@ -183,7 +183,7 @@ public class Utilities {
 
     //This get's a new random location in the world between the stated parameters.
     @SuppressWarnings("deprecation")
-    public Location newRandomLoc(String world, int paraXMax, int paraXMin, int paraZMax, int paraZMin, int maxY, int minY){
+    public Location newRandomLoc(String world, int paraXMax, int paraXMin, int paraZMax, int paraZMin, int maxY, int minY, boolean deBug){
         Random random = new Random();
         Location teleportLoc = null;
         Location teleportLoca1 = null;
@@ -191,6 +191,10 @@ public class Utilities {
         Location teleportLocb2 = null;
         Location teleportLocb1 = null;
         Location teleportLocb3 = null;
+
+        int noSafe = 0;
+        int foundWater = 0;
+        int yAxis = 0;
 
 
         World World = Bukkit.getWorld(world);
@@ -217,17 +221,21 @@ public class Utilities {
                         && teleportLoca2.getBlock().getType() != org.bukkit.Material.STATIONARY_WATER){
                     land = true;
                     // Found safe location!
-                    for (Player p : Bukkit.getOnlinePlayers()){
-                        p.sendMessage(ChatColor.translateAlternateColorCodes('&',"&a&lFound location."));
+                    if (deBug) {
+                        for (Player p : Bukkit.getOnlinePlayers()) {
+                            int both = noSafe + foundWater;
+                            p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&6&oFound Safe Location. &f&o-Found Water &b&o" + foundWater + " &f&oTime(s)."));
+                            p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&f&o-No Safe Land &b&o" + noSafe + " &f&oTime(s)."));
+                            p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&6&oTotal Tries. &f&o-Total &b&o" + both + " &f&oTime(s).    &f&o-Y Axis Lowered &b&o" + yAxis));
+
+                        }
                     }
                 } else {
                     // Found water, randomizing again...
                     y = maxY;
                     x = random.nextInt((paraXMax - paraXMin) + 1) + paraXMin;
                     z = random.nextInt((paraZMax - paraZMin) + 1) + paraZMin;
-                    for (Player p : Bukkit.getOnlinePlayers()){
-                        p.sendMessage(ChatColor.translateAlternateColorCodes('&',"&c&oFound water - Rolling Dice."));
-                    }
+                    foundWater++;
                 }
             } else {
                 if (y <= minY){
@@ -235,17 +243,16 @@ public class Utilities {
                     y = maxY;
                     x = random.nextInt((paraXMax - paraXMin) + 1) + paraXMin;
                     z = random.nextInt((paraZMax - paraZMin) + 1) + paraZMin;
-                    for (Player p : Bukkit.getOnlinePlayers()){
-                        p.sendMessage(ChatColor.translateAlternateColorCodes('&',"&c&oNo Safe Land - Rolling Dice."));
-                    }
+                    noSafe++;
                 } else {
                     // Y Axis to High, Lowing Y.
                     y--;
+                    yAxis++;
                 }
             }
         }
 
-        Location Spawn = new Location(World, x + 0.5, y + 1, z + 0.5 );
+        Location Spawn = new Location(World, x + 0.5, y + 2.1, z + 0.5 );
 
         return Spawn;
     }

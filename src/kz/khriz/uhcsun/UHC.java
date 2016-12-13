@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.HashMap;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -46,6 +47,12 @@ public class UHC extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new GameEvents(this), this);
 
         UTIL.defaultConfig();
+    }
+
+    public Location rl(){
+        Location Spawn = UTIL.newRandomLoc("UHC", 1000, 100, 1000, 100, 112, 60, true);
+
+        return Spawn;
     }
 
     // Here are the Current Hash Maps.
