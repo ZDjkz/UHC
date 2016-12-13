@@ -48,3 +48,8 @@ Temporary Items
 out/production/UHC Sun/kz/khriz/uhcsun/Utilities$8.class
 out/production/UHC Sun/kz/khriz/uhcsun/Utilities$5.class
 out/production/UHC Sun/kz/khriz/uhcsun/PreGameEvents$1.class
+
+
+$ ls .idea
+$ ls out
+$ ls UHC Sun.iml
