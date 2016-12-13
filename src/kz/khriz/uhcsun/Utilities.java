@@ -71,15 +71,21 @@ public class Utilities {
         UHC.FILE.saveBorder();
         setupGame();
 
+
+        for (Player p : Bukkit.getOnlinePlayers()) {
+            UHC.SCOREBOARD.startUHCGameBoard(p);
+        }
+
         Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(kz.khriz.uhcsun.UHC.getPlugin(UHC.class), new Runnable() {
 
             @Override
             public void run() {
                 UHC.Game.put("PVP", "ENABLED");
                 Bukkit.getServer().broadcastMessage(UHC.PREFIX + ChatColor.translateAlternateColorCodes('&',"&c&lPVP Has Been Enabled."));
+                Bukkit.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', "&6&l(ง ͡⎚ᨎ ͡⎚)ง &c&oBegin Battle Children"));
             }
 
-        }, (((15 * 2)) * 20));
+        }, ((60 * 1/2) * 20) + 10*20);
 
     }
 
@@ -192,11 +198,15 @@ public class Utilities {
         Location teleportLocb2 = null;
         Location teleportLocb1 = null;
         Location teleportLocb3 = null;
+        Location waterBase = null;
+        Location waterBasea1 = null;
+        Location waterBasem1 = null;
 
         int noSafe = 0;
         int foundWater = 0;
         int yAxis = 0;
 
+        int at60WF = 0;
 
         World World = Bukkit.getWorld(world);
         int x = random.nextInt((paraXMax - paraXMin) + 1) + paraXMin;
@@ -204,6 +214,20 @@ public class Utilities {
         int y = maxY;
         boolean land = false;
         while (land == false){
+
+            waterBase = new Location(World, x + 0.5, 61, z + 0.5);
+            waterBasea1 = new Location(World, x + 0.5, 62, z + 0.5);
+            waterBasem1 = new Location(World, x + 0.5, 63, z + 0.5);
+
+            if (waterBase.getBlock().getType() == org.bukkit.Material.STATIONARY_WATER
+                    || waterBasea1.getBlock().getType() == org.bukkit.Material.STATIONARY_WATER
+                    || waterBasem1.getBlock().getType() == org.bukkit.Material.STATIONARY_WATER){
+                y = maxY;
+                x = random.nextInt((paraXMax - paraXMin) + 1) + paraXMin;
+                z = random.nextInt((paraZMax - paraZMin) + 1) + paraZMin;
+                foundWater++;
+            }
+
             teleportLocb3 = new Location(World, x + 0.5, y - 2, z + 0.5);
             teleportLocb2 = new Location(World, x + 0.5, y - 1, z + 0.5);
             teleportLocb1 = new Location(World, x + 0.5, y, z + 0.5);
@@ -224,7 +248,7 @@ public class Utilities {
                     // Found safe location!
                     if (deBug) {
                         for (Player p : Bukkit.getOnlinePlayers()) {
-                            int both = noSafe + foundWater + 1;
+                            int both = noSafe + foundWater + at60WF+  1;
                             p.sendMessage("");
                             p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&6&lFound Safe Location. &c&oTried &f&o" + both + " &f&oTime(s)."));
                             p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&f&o-Found Water &b&o" + foundWater + " &f&oTime(s)."));
