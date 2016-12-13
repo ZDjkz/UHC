@@ -154,6 +154,7 @@ public class Utilities {
                 for (Player online : Bukkit.getOnlinePlayers()){
                     Location Spawn = newRandomLoc("UHC", 1000, 100, 1000, 100, 156, 60, false);
                     online.teleport(Spawn);
+                    UHC.userTPLocs.put(online.getName(), Spawn);
 
                     online.sendMessage(UHC.PREFIX + ChatColor.translateAlternateColorCodes('&', "&6&oThe game will begin in &2&l10&6&o seconds."));
                     chatTimer(online);

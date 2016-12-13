@@ -64,6 +64,7 @@ public class UHC extends JavaPlugin {
     HashMap<Object, Object> Game = new HashMap<Object, Object>();
     HashMap<Object, Double> DamageMap = new HashMap<Object, Double>();
     HashMap<Object, Double> DamageTook = new HashMap<Object, Double>();
+    HashMap<Object, Location> userTPLocs = new HashMap<Object, Location>();
 
     public void setGame(){
         Game.put("NAME", UTIL.getHour());
