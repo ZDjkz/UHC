@@ -206,8 +206,6 @@ public class Utilities {
         int foundWater = 0;
         int yAxis = 0;
 
-        int at60WF = 0;
-
         World World = Bukkit.getWorld(world);
         int x = random.nextInt((paraXMax - paraXMin) + 1) + paraXMin;
         int z = random.nextInt((paraZMax - paraZMin) + 1) + paraZMin;
@@ -222,6 +220,7 @@ public class Utilities {
             if (waterBase.getBlock().getType() == org.bukkit.Material.STATIONARY_WATER
                     || waterBasea1.getBlock().getType() == org.bukkit.Material.STATIONARY_WATER
                     || waterBasem1.getBlock().getType() == org.bukkit.Material.STATIONARY_WATER){
+                // Found water, randomizing again...
                 y = maxY;
                 x = random.nextInt((paraXMax - paraXMin) + 1) + paraXMin;
                 z = random.nextInt((paraZMax - paraZMin) + 1) + paraZMin;
@@ -248,7 +247,7 @@ public class Utilities {
                     // Found safe location!
                     if (deBug) {
                         for (Player p : Bukkit.getOnlinePlayers()) {
-                            int both = noSafe + foundWater + at60WF+  1;
+                            int both = noSafe + foundWater + 1;
                             p.sendMessage("");
                             p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&6&lFound Safe Location. &c&oTried &f&o" + both + " &f&oTime(s)."));
                             p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&f&o-Found Water &b&o" + foundWater + " &f&oTime(s)."));
