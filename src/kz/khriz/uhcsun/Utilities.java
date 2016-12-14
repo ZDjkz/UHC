@@ -130,6 +130,20 @@ public class Utilities {
             UHC.SCOREBOARD.startUHCGameBoard(p, false);
         }
 
+        ArrayList<String> everyone = new ArrayList<>();
+        for (Player p : Bukkit.getOnlinePlayers()) {
+            everyone.add(p.getName());
+        }
+        final File ConcurrentGamesFile = new File("plugins/UHC/Games/", UHC.Game.get("GAME ID") + ".yml");
+        final FileConfiguration ConcurrentGames = YamlConfiguration.loadConfiguration(ConcurrentGamesFile);
+        ConcurrentGames.set("EXISTING", everyone);
+        try {
+            ConcurrentGames.save(ConcurrentGamesFile);
+        } catch (IOException ex) {
+            Bukkit.getServer().getConsoleSender().sendMessage(net.md_5.bungee.api.ChatColor.translateAlternateColorCodes('&', "&c&lWe're having Major Errors with UHC, screen shot the Error"
+                    + " and send it to Khriz."));
+        }
+
         Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(kz.khriz.uhcsun.UHC.getPlugin(UHC.class), new Runnable() {
 
             @Override
@@ -234,6 +248,7 @@ public class Utilities {
 
                     online.setMaxHealth(40);
                     online.setHealth(40);
+                    online.setFoodLevel(20);
                 }
                 ConcurrentGames.set("ALIVE", UsersAlive);
                 try {
@@ -250,6 +265,7 @@ public class Utilities {
             @Override
             public void run() {
                 UHC.Game.put("PREGAME", "FALSE");
+                UHC.userTPLocs.clear();
                 UHC.PlayerData.clear();
                 UHC.Game.put("STARTED", "TRUE");
             }

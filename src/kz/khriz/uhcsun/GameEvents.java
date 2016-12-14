@@ -8,11 +8,13 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityRegainHealthEvent;
+import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 
 public class GameEvents implements Listener {
@@ -23,14 +25,26 @@ public class GameEvents implements Listener {
     }
 
     @EventHandler
+    public void foodDeprecator(FoodLevelChangeEvent e){
+        if (e.isCancelled()) return;
+        if (e.getEntityType() != EntityType.PLAYER) return;
+        Player p = (Player) e.getEntity();
+        if (p.isSprinting()){
+            e.setFoodLevel(e.getFoodLevel() - 1);
+        } else {
+            e.setFoodLevel(e.getFoodLevel() + 1);
+        }
+    }
+
+    @EventHandler
     public void Regen(EntityRegainHealthEvent e){
-        if (!(e.getEntity() instanceof Player)) return;
+        if (!(e.getEntityType() == EntityType.PLAYER)) return;
         final File ConcurrentGamesFile = new File("plugins/UHC/Games/", UHC.Game.get("GAME ID") + ".yml");
         final FileConfiguration ConcurrentGames = YamlConfiguration.loadConfiguration(ConcurrentGamesFile);
         ArrayList<String> UsersAlive = (ArrayList<String>) ConcurrentGames.getStringList("ALIVE");
         Player p = (Player) e.getEntity();
 
-        if (UsersAlive.contains(p.getUniqueId())){
+        if (UsersAlive.contains(p.getName())){
             e.setCancelled(true);
         }
     }
@@ -49,6 +63,22 @@ public class GameEvents implements Listener {
 
         ArrayList<String> UsersAlive = (ArrayList<String>) ConcurrentGames.getStringList("ALIVE");
         Player p = (Player) e.getEntity();
+        Player k = p.getKiller();
+
+        Double DMGT = 0.0;
+        Double dmDid = 0.0;
+        Double PercentageDoneByYou = 0.0;
+        Double Stars = 0.0;
+        for (String dm : ConcurrentGames.getStringList("EXISTING")){
+            DMGT = UHC.DamageTook.get(p.getName());
+            dmDid = UHC.DamageMap.get(p.getName() + " " + dm);
+
+            PercentageDoneByYou = DMGT / dmDid;
+
+            Stars = 25 / PercentageDoneByYou;
+        }
+
+        // ADD METHOD TO MESSAGE ALL PLAYERS THAT WERE PART OF THE KILLING
 
         UsersAlive.remove(p.getName());
         ConcurrentGames.set("ALIVE", UsersAlive);
@@ -81,7 +111,7 @@ public class GameEvents implements Listener {
                         online.sendMessage(ChatColor.translateAlternateColorCodes('&', "              &9&lThe Winner is &6&o" + alive));
                         online.sendMessage(ChatColor.translateAlternateColorCodes('&', ""));
                     } else {
-                        online.sendMessage(ChatColor.translateAlternateColorCodes('&', "&c&oYou killed &e&o" + p.getName() + "&6&l +&e&o25 &c&oStars"));
+                        online.sendMessage(ChatColor.translateAlternateColorCodes('&', "&c&oYou killed &e&o" + p.getName() + "&6&l +&e&o" + Stars + " &c&oStars.   &6&l" + PercentageDoneByYou + "&7&o%"));
                         online.sendMessage(ChatColor.translateAlternateColorCodes('&', ""));
                         online.sendMessage(ChatColor.translateAlternateColorCodes('&', "              &9&lYou won!"));
                         online.sendMessage(ChatColor.translateAlternateColorCodes('&', ""));
@@ -94,7 +124,7 @@ public class GameEvents implements Listener {
         if (!CnclMsg){
             for (Player online : Bukkit.getOnlinePlayers()){
                 if (online.getName() == p.getKiller().getName()){
-                    online.sendMessage(ChatColor.translateAlternateColorCodes('&', "&c&oYou killed &e&o" + p.getName() + "&6&l +&e&o25 &c&oStars"));
+                    online.sendMessage(ChatColor.translateAlternateColorCodes('&', "&c&oYou killed &e&o" + p.getName() + "&6&l +&e&o" + Stars + " &c&oStars.   &6&l" + PercentageDoneByYou + "&7&o%"));
                 } else {
                     online.sendMessage(ChatColor.translateAlternateColorCodes('&', "&6&o" + p.getKiller() + " &c&okilled &e&o" + p.getName()));
                 }
@@ -109,9 +139,16 @@ public class GameEvents implements Listener {
 
     @EventHandler
     public void DamageEvent(EntityDamageByEntityEvent e){
-        if (!(e.getEntity() instanceof Player)) return;
-        if (!(e.getDamager() instanceof Player)) return;
-        if (UHC.Game.get("PVP") == "DISABLED") return;
+        if (!(e.getEntityType() == EntityType.PLAYER)) {
+            return;
+        }
+        if (!(e.getDamager() instanceof Player)) {
+            return;
+        }
+        if (UHC.Game.get("PVP") == "DISABLED") {
+            e.setCancelled(true);
+            return;
+        }
         if (UHC.Game.get("STARTED") == "FINISHED"){
             e.setCancelled(true);
             return;
@@ -123,19 +160,22 @@ public class GameEvents implements Listener {
         if (UHC.Game.containsKey("NAME")){
             Player p = (Player) e.getEntity();
             Player a = (Player) e.getDamager();
+
             Double amount = e.getDamage();
-            p.sendMessage(amount.toString());
             Double current = (double) 0;
-            if (UHC.DamageMap.containsKey(a.getName() + " " + p.getName())){
-                current = UHC.DamageMap.get(a.getName() + " " + p.getName());
+
+            if (UHC.DamageMap.containsKey(p.getName() + " " + a.getName())){
+                current = UHC.DamageMap.get(p.getName() + " " + a.getName());
             }
-            p.sendMessage(current.toString());
-            UHC.DamageMap.put(a.getName() + " " + p.getName(), amount + current);
+
+            UHC.DamageMap.put(p.getName() + " " + a.getName(), amount + current);
+
             Double currentT = (double) 0;
-            if (UHC.DamageMap.containsKey(a.getName() + " " + p.getName())){
+
+            if (UHC.DamageMap.containsKey(p.getName() + " " + a.getName())){
                 currentT = UHC.DamageTook.get(p.getName());
             }
-            p.sendMessage(currentT.toString());
+
             UHC.DamageTook.put(p.getName(), amount + currentT);
         }
     }

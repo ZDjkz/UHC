@@ -41,9 +41,9 @@ public class UHCScoreboard implements Listener {
         kills.setSuffix(ChatColor.RED + "0");
         obj.getScore(ChatColor.GREEN.toString()).setScore(2);
 
-        Team coins = Board.registerNewTeam("coins");
+        Team coins = Board.registerNewTeam("stars");
         coins.addEntry(ChatColor.LIGHT_PURPLE.toString());
-        coins.setPrefix(ChatColor.translateAlternateColorCodes('&', "&6&oCoins &7> "));
+        coins.setPrefix(ChatColor.translateAlternateColorCodes('&', "&6&oStars &7> "));
         coins.setSuffix(ChatColor.RED + "0");
         obj.getScore(ChatColor.LIGHT_PURPLE.toString()).setScore(3);
 

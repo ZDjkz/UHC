@@ -28,7 +28,7 @@ public class UHC extends JavaPlugin {
     //Here is the UHC Prefix.
     public String PREFIX = ChatColor.translateAlternateColorCodes('&', "&c&lU&6&lH&e&lC &e&lS&6&lU&c&lN &f&o- ");
 
-    public int Mins = 7;
+    public int Mins = 0;
     public int Seconds = 30;
 
     @Override
@@ -45,6 +45,8 @@ public class UHC extends JavaPlugin {
         PlayerData.clear();
         DamageMap.clear();
         DamageTook.clear();
+        userTPLocs.clear();
+        recipeUseage.clear();
     }
 
     public void loadUHC(){
