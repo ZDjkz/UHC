@@ -18,22 +18,11 @@ public class FileRegistry {
 
     Utilities UTIL = new Utilities(this);
 
-    final File ConcurrentGamesFile = new File("plugins/UHC/Games/", UTIL.getHour() + ".yml");
-    final FileConfiguration ConcurrentGames = YamlConfiguration.loadConfiguration(ConcurrentGamesFile);
-    public void saveConcurrentGame(){
-        try {
-            ConcurrentGames.save(ConcurrentGamesFile);
-        } catch(IOException e) {
-            Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', "&c&lWe're having Major Errors with UHC, screen shot the Error"
-                    + " and send it to Khriz."));
-        }
-    }
-
     final File StorageFile = new File("plugins/UHC/Data/", "Storage.yml");
-    final FileConfiguration Storage = YamlConfiguration.loadConfiguration(ConcurrentGamesFile);
+    final FileConfiguration Storage = YamlConfiguration.loadConfiguration(StorageFile);
     public void saveStorage(){
         try {
-            Storage.save(ConcurrentGamesFile);
+            Storage.save(StorageFile);
         } catch(IOException e) {
             Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', "&c&lWe're having Major Errors with UHC, screen shot the Error"
                     + " and send it to Khriz."));

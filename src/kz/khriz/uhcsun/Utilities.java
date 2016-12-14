@@ -1,12 +1,17 @@
 package kz.khriz.uhcsun;
 
+import java.io.File;
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
+import net.md_5.bungee.api.*;
 import org.bukkit.*;
+import org.bukkit.ChatColor;
 import org.bukkit.block.*;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.generator.ChunkGenerator;
 
@@ -55,6 +60,55 @@ public class Utilities {
         UHC.SaveConfig();
     }
 
+    public String createNewID(){
+        Random random = new Random();
+        List UsedIds = UHC.FILE.Storage.getStringList("USED-IDS");
+
+        int Min = 0;
+        int Max = 14;
+        String finalID = "";
+        boolean alreadyID = true;
+        while (alreadyID == true) {
+            String ID = "";
+
+            for(int a = 0; a < 5; a++){
+                int firstChar = random.nextInt((Max - Min) + 1) + Min;
+                String firstCharS;
+
+                if (firstChar <= 9){
+                    firstCharS = firstChar + "";
+                    ID = ID + firstCharS;
+                } else {
+                    if (firstChar == 14) {
+                        firstCharS = "A";
+                        ID = ID + firstCharS;
+                    }
+                    if (firstChar == 13) {
+                        firstCharS = "B";
+                        ID = ID + firstCharS;
+                    }
+                    if (firstChar == 12) {
+                        firstCharS = "C";
+                        ID = ID + firstCharS;
+                    }
+                    if (firstChar == 11) {
+                        firstCharS = "D";
+                        ID = ID + firstCharS;
+                    }
+                    if (firstChar == 10) {
+                        firstCharS = "F";
+                        ID = ID + firstCharS;
+                    }
+                }
+            }
+            if (!UsedIds.contains(ID)){
+                alreadyID = false;
+                finalID = ID;
+            }
+        }
+        return finalID;
+    }
+
     public ChunkGenerator getDefaultWorldGenerator(String worldName, String id) {
         return new UHCGenerator(UHC);
     }
@@ -73,7 +127,7 @@ public class Utilities {
 
 
         for (Player p : Bukkit.getOnlinePlayers()) {
-            UHC.SCOREBOARD.startUHCGameBoard(p);
+            UHC.SCOREBOARD.startUHCGameBoard(p, false);
         }
 
         Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(kz.khriz.uhcsun.UHC.getPlugin(UHC.class), new Runnable() {
@@ -85,7 +139,7 @@ public class Utilities {
                 Bukkit.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', "&6&l(ง ͡⎚ᨎ ͡⎚)ง &c&oBegin Battle Children"));
             }
 
-        }, ((60 * 1/2) * 20) + 10*20);
+        }, (UHC.Seconds * 20) + ((60 * UHC.Mins) * 20) + 10*20);
 
     }
 
@@ -142,14 +196,15 @@ public class Utilities {
                 p.sendMessage(ChatColor.translateAlternateColorCodes('&', ""));
                 p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&3&oINFO &9&l- &f&oGame ID; " + id + "   &f&oDate; " + name));
                 p.sendMessage(ChatColor.translateAlternateColorCodes('&', ""));
-                p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&9&oYou have 7.5 Minutes to prepare then PvP is Enabled"));
+                p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&9&oYou have " + UHC.Mins + ":" + UHC.Seconds + " to prepare then PVP is Enabled"));
                 p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&a&oTIP &9&l- &a&lDon't take fall damage. You can't regen."));
                 p.sendMessage("");
             }
         }, ((10)) * 20);
     }
 
-    public void setupGame(){
+    public void setupGame() {
+
         Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(kz.khriz.uhcsun.UHC.getPlugin(UHC.class), new Runnable() {
 
             ArrayList<String> UsersAlive = new ArrayList<String>();
@@ -157,7 +212,10 @@ public class Utilities {
             @SuppressWarnings("deprecation")
             @Override
             public void run() {
-                for (Player online : Bukkit.getOnlinePlayers()){
+                final File ConcurrentGamesFile = new File("plugins/UHC/Games/", UHC.Game.get("GAME ID") + ".yml");
+                final FileConfiguration ConcurrentGames = YamlConfiguration.loadConfiguration(ConcurrentGamesFile);
+
+                for (Player online : Bukkit.getOnlinePlayers()) {
                     Location Spawn = newRandomLoc("UHC", 1000, 100, 1000, 100, 156, 60, false);
                     online.teleport(Spawn);
                     UHC.userTPLocs.put(online.getName(), Spawn);
@@ -166,14 +224,24 @@ public class Utilities {
                     chatTimer(online);
                     UsersAlive.add(online.getName());
 
-                    UHC.FILE.ConcurrentGames.set(online.getName() + ".ALIVE", true);
-                    UHC.FILE.saveConcurrentGame();
+                    ConcurrentGames.set(online.getName() + ".ALIVE", true);
+                    try {
+                        ConcurrentGames.save(ConcurrentGamesFile);
+                    } catch (IOException e) {
+                        Bukkit.getServer().getConsoleSender().sendMessage(net.md_5.bungee.api.ChatColor.translateAlternateColorCodes('&', "&c&lWe're having Major Errors with UHC, screen shot the Error"
+                                + " and send it to Khriz."));
+                    }
 
                     online.setMaxHealth(40);
                     online.setHealth(40);
                 }
-                UHC.FILE.ConcurrentGames.set("ALIVE", UsersAlive);
-                UHC.FILE.saveConcurrentGame();
+                ConcurrentGames.set("ALIVE", UsersAlive);
+                try {
+                    ConcurrentGames.save(ConcurrentGamesFile);
+                } catch (IOException e) {
+                    Bukkit.getServer().getConsoleSender().sendMessage(net.md_5.bungee.api.ChatColor.translateAlternateColorCodes('&', "&c&lWe're having Major Errors with UHC, screen shot the Error"
+                            + " and send it to Khriz."));
+                }
             }
         }, 1 * 20);
 
@@ -187,6 +255,7 @@ public class Utilities {
             }
         }, 11 * 20);
     }
+
 
     //This get's a new random location in the world between the stated parameters.
     @SuppressWarnings("deprecation")

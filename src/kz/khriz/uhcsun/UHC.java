@@ -3,6 +3,7 @@ package kz.khriz.uhcsun;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -27,6 +28,8 @@ public class UHC extends JavaPlugin {
     //Here is the UHC Prefix.
     public String PREFIX = ChatColor.translateAlternateColorCodes('&', "&c&lU&6&lH&e&lC &e&lS&6&lU&c&lN &f&o- ");
 
+    public int Mins = 7;
+    public int Seconds = 30;
 
     @Override
     public void onEnable() {
@@ -37,8 +40,7 @@ public class UHC extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        FILE.ConcurrentGames.set("ALIVE", null);
-        FILE.saveConcurrentGame();
+        Game.clear();
         clearGame();
         PlayerData.clear();
         DamageMap.clear();
@@ -75,7 +77,11 @@ public class UHC extends JavaPlugin {
 
     public void setGame(){
         Game.put("NAME", UTIL.getHour());
-        Game.put("GAME ID", Config.getInt("GAMES") + 1);
+        Game.put("GAME ID", UTIL.createNewID());
+        List IDS = FILE.Storage.getStringList("USED-IDS");
+        IDS.add(Game.get("GAME ID").toString());
+        FILE.Storage.set("USED-IDS", IDS);
+        FILE.saveStorage();
         Game.put("PVP", "DISABLED");
 
         UTIL.startGame();

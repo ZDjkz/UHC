@@ -1,9 +1,13 @@
 package kz.khriz.uhcsun;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -21,7 +25,9 @@ public class GameEvents implements Listener {
     @EventHandler
     public void Regen(EntityRegainHealthEvent e){
         if (!(e.getEntity() instanceof Player)) return;
-        ArrayList<String> UsersAlive = (ArrayList<String>) UHC.FILE.ConcurrentGames.getStringList("ALIVE");
+        final File ConcurrentGamesFile = new File("plugins/UHC/Games/", UHC.Game.get("GAME ID") + ".yml");
+        final FileConfiguration ConcurrentGames = YamlConfiguration.loadConfiguration(ConcurrentGamesFile);
+        ArrayList<String> UsersAlive = (ArrayList<String>) ConcurrentGames.getStringList("ALIVE");
         Player p = (Player) e.getEntity();
 
         if (UsersAlive.contains(p.getUniqueId())){
@@ -38,22 +44,35 @@ public class GameEvents implements Listener {
         if (UHC.Game.get("PREGAME") == "TRUE"){
             return;
         }
-        ArrayList<String> UsersAlive = (ArrayList<String>) UHC.FILE.ConcurrentGames.getStringList("ALIVE");
+        final File ConcurrentGamesFile = new File("plugins/UHC/Games/", UHC.Game.get("GAME ID") + ".yml");
+        final FileConfiguration ConcurrentGames = YamlConfiguration.loadConfiguration(ConcurrentGamesFile);
+
+        ArrayList<String> UsersAlive = (ArrayList<String>) ConcurrentGames.getStringList("ALIVE");
         Player p = (Player) e.getEntity();
 
         p.spigot().respawn();
 
         UsersAlive.remove(p.getName());
-        UHC.FILE.ConcurrentGames.set("ALIVE", UsersAlive);
-        UHC.FILE.saveConcurrentGame();
+        ConcurrentGames.set("ALIVE", UsersAlive);
+        try {
+            ConcurrentGames.save(ConcurrentGamesFile);
+        } catch (IOException ex) {
+            Bukkit.getServer().getConsoleSender().sendMessage(net.md_5.bungee.api.ChatColor.translateAlternateColorCodes('&', "&c&lWe're having Major Errors with UHC, screen shot the Error"
+                    + " and send it to Khriz."));
+        }
 
-        UHC.FILE.ConcurrentGames.set(p.getName() + ".ALIVE", false);
-        UHC.FILE.saveConcurrentGame();
+        ConcurrentGames.set(p.getName() + ".ALIVE", false);
+        try {
+            ConcurrentGames.save(ConcurrentGamesFile);
+        } catch (IOException exx) {
+            Bukkit.getServer().getConsoleSender().sendMessage(net.md_5.bungee.api.ChatColor.translateAlternateColorCodes('&', "&c&lWe're having Major Errors with UHC, screen shot the Error"
+                    + " and send it to Khriz."));
+        }
 
         boolean CnclMsg = false;
 
-        ArrayList<String> AliveUsers = (ArrayList<String>) UHC.FILE.ConcurrentGames.getStringList("ALIVE");
-        for (String alive : (ArrayList<String>) UHC.FILE.ConcurrentGames.getStringList("ALIVE")){
+        ArrayList<String> AliveUsers = (ArrayList<String>) ConcurrentGames.getStringList("ALIVE");
+        for (String alive : (ArrayList<String>) ConcurrentGames.getStringList("ALIVE")){
             if (AliveUsers.size() == 1){
                 CnclMsg = true;
                 UHC.Game.put("STARTED", "FINISHED");
