@@ -50,8 +50,6 @@ public class GameEvents implements Listener {
         ArrayList<String> UsersAlive = (ArrayList<String>) ConcurrentGames.getStringList("ALIVE");
         Player p = (Player) e.getEntity();
 
-        p.spigot().respawn();
-
         UsersAlive.remove(p.getName());
         ConcurrentGames.set("ALIVE", UsersAlive);
         try {
@@ -78,7 +76,7 @@ public class GameEvents implements Listener {
                 UHC.Game.put("STARTED", "FINISHED");
                 for (Player online : Bukkit.getOnlinePlayers()){
                     if (!(online.getName().equals(p.getKiller().getName()))){
-                        online.sendMessage(ChatColor.translateAlternateColorCodes('&', "&6&o" + p.getKiller() + " &c&okilled &e&o" + p.getName()));
+                        online.sendMessage(ChatColor.translateAlternateColorCodes('&', "&6&o" + p.getKiller().getName() + " &c&okilled &e&o" + p.getName()));
                         online.sendMessage(ChatColor.translateAlternateColorCodes('&', ""));
                         online.sendMessage(ChatColor.translateAlternateColorCodes('&', "              &9&lThe Winner is &6&o" + alive));
                         online.sendMessage(ChatColor.translateAlternateColorCodes('&', ""));
@@ -105,6 +103,8 @@ public class GameEvents implements Listener {
         } else {
             e.setDeathMessage("");
         }
+
+        p.spigot().respawn();
     }
 
     @EventHandler
@@ -137,7 +137,6 @@ public class GameEvents implements Listener {
             }
             p.sendMessage(currentT.toString());
             UHC.DamageTook.put(p.getName(), amount + currentT);
-
         }
     }
 }
