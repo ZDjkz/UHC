@@ -91,7 +91,10 @@ public class UHCCommand implements CommandExecutor {
                         p.teleport(Spawn);
                     }
                     if (args[1].equalsIgnoreCase("sb")){
-                        UHC.SCOREBOARD.startUHCGameBoard(p);
+                        UHC.SCOREBOARD.startUHCGameBoard(p, false);
+                    }
+                    if (args[1].equalsIgnoreCase("sbid")){
+                        UHC.SCOREBOARD.startUHCGameBoard(p, true);
                     }
                 }
                 if (args[0].equalsIgnoreCase("Lobby")){

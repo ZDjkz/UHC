@@ -16,35 +16,59 @@ public class UHCScoreboard implements Listener {
     }
 
     @EventHandler
-    public void startUHCGameBoard(Player p){
+    public void startUHCGameBoard(Player p, boolean idDebug){
         Scoreboard Board = Bukkit.getScoreboardManager().getNewScoreboard();
         Objective obj = Board.registerNewObjective("UHC", "dummy");
         obj.setDisplaySlot(DisplaySlot.SIDEBAR);
-        obj.setDisplayName(ChatColor.translateAlternateColorCodes('&',"&cUHC &6Sun &f- &e" + UHC.Game.get("GAME ID")));
+        Object GameID = UHC.Game.get("GAME ID");
+        if (idDebug){
+            GameID = UHC.UTIL.createNewID();
+        } else {
+            if (GameID == null) GameID = "DEBUG";
+        }
+        obj.setDisplayName(ChatColor.translateAlternateColorCodes('&',"&cUHC &6Sun &f- &e" + GameID));
 
-        Score name = obj.getScore(p.getName());
+        Score name = obj.getScore(ChatColor.translateAlternateColorCodes('&', "&a&l" + p.getName()));
         name.setScore(0);
 
+        Team emptyLine = Board.registerNewTeam("eLineOne");
+        emptyLine.addEntry(ChatColor.RED.toString());
+        obj.getScore(ChatColor.RED.toString()).setScore(1);
 
+        Team kills = Board.registerNewTeam("kills");
+        kills.addEntry(ChatColor.GREEN.toString());
+        kills.setPrefix(ChatColor.translateAlternateColorCodes('&', "&6&oKills &7> "));
+        kills.setSuffix(ChatColor.RED + "0");
+        obj.getScore(ChatColor.GREEN.toString()).setScore(2);
+
+        Team coins = Board.registerNewTeam("coins");
+        coins.addEntry(ChatColor.LIGHT_PURPLE.toString());
+        coins.setPrefix(ChatColor.translateAlternateColorCodes('&', "&6&oCoins &7> "));
+        coins.setSuffix(ChatColor.RED + "0");
+        obj.getScore(ChatColor.LIGHT_PURPLE.toString()).setScore(3);
+
+        Team emptyLine2 = Board.registerNewTeam("eLineTwo");
+        emptyLine2.addEntry(ChatColor.BLUE.toString());
+        obj.getScore(ChatColor.BLUE.toString()).setScore(4);
 
         Team timeleft = Board.registerNewTeam("TimeLeft");
-        timeleft.addEntry(ChatColor.RED.toString());
-        timeleft.setPrefix(ChatColor.GOLD + "PvP > ");
-        timeleft.setSuffix(ChatColor.RED + "0:30");
-        obj.getScore(ChatColor.RED.toString()).setScore(5);
+        timeleft.addEntry(ChatColor.GOLD.toString());
+        timeleft.setPrefix(ChatColor.translateAlternateColorCodes('&', "&6&lPVP &8> "));
+        timeleft.setSuffix(ChatColor.RED + "" + UHC.Mins + ":" + UHC.Seconds);
+        obj.getScore(ChatColor.GOLD.toString()).setScore(5);
 
         Team date = Board.registerNewTeam("Date");
-        date.addEntry(ChatColor.GOLD.toString());
+        date.addEntry(ChatColor.YELLOW.toString());
         date.setPrefix(ChatColor.DARK_GRAY + UHC.UTIL.getDay());
-        date.setSuffix(ChatColor.RED + "0:30");
-        obj.getScore(ChatColor.RED.toString()).setScore(6);
+        date.setSuffix(ChatColor.RED + "");
+        obj.getScore(ChatColor.YELLOW.toString()).setScore(6);
 
         p.setScoreboard(Board);
 
         new BukkitRunnable() {
 
-            int TLeftS = 30;
-            int TLeftM = 0;
+            int TLeftM = UHC.Mins;
+            int TLeftS = UHC.Seconds;
 
             @Override
             public  void run(){
