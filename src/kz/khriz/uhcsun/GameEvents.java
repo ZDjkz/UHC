@@ -3,6 +3,7 @@ package kz.khriz.uhcsun;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -16,6 +17,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityRegainHealthEvent;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.scheduler.BukkitRunnable;
 
 public class GameEvents implements Listener {
 
@@ -65,17 +67,52 @@ public class GameEvents implements Listener {
         Player p = (Player) e.getEntity();
         Player k = p.getKiller();
 
-        Double DMGT = 0.0;
-        Double dmDid = 0.0;
-        Double PercentageDoneByYou = 0.0;
-        Double Stars = 0.0;
-        for (String dm : ConcurrentGames.getStringList("EXISTING")){
-            DMGT = UHC.DamageTook.get(p.getName());
-            dmDid = UHC.DamageMap.get(p.getName() + " " + dm);
+        Double totalDamage = 0.0;
+        Double damageDid = 0.0;
+        Double percentByYou = 0.0;
+        Double Stars = 25.0;
 
-            PercentageDoneByYou = DMGT / dmDid;
+        int TrueStars = 0;
+        for (String existingPlayer : ConcurrentGames.getStringList("EXISTING")){
+            if (UHC.PlayerTAttackerDamage.containsKey(p.getName() + ":" + existingPlayer.toString())){
+                totalDamage = UHC.TotalDamageTook.get(p.getName());
+                damageDid = UHC.PlayerTAttackerDamage.get(p.getName() + ":" + existingPlayer.toString());
+                Double totalToP = damageDid / 10.0;
+                if (damageDid >= totalDamage){
+                    percentByYou = 100.0;
+                } else {
+                    percentByYou = totalDamage * totalToP;
+                }
 
-            Stars = 25 / PercentageDoneByYou;
+                Stars = Stars % UHC.UTIL.round(percentByYou);
+
+                TrueStars = UHC.UTIL.round(Stars);
+                Player attacker = Bukkit.getPlayer(existingPlayer);
+                if (attacker != null){
+                    if (attacker.getName() != k.getName()){
+                        int CurrentStars = 0;
+                        if (UHC.PlayerData.containsKey(attacker.getName() + ":Stars")){
+                            CurrentStars = Integer.parseInt( UHC.PlayerData.get(attacker.getName() + ":Stars") + "");
+                        }
+                        UHC.PlayerData.put(attacker.getName() + ":Stars", CurrentStars + TrueStars);
+                        attacker.sendMessage(ChatColor.translateAlternateColorCodes('&', "&c&oYou helped kill &e&o" + p.getName() + "&6&l +&e&o" + TrueStars + " &c&oStars.   &6&l" + UHC.UTIL.round(percentByYou) + "&7&o%"));
+                    } else {
+                        int CurrentStars = 0;
+                        if (UHC.PlayerData.containsKey(attacker.getName() + ":Stars")){
+                            CurrentStars = Integer.parseInt( UHC.PlayerData.get(attacker.getName() + ":Stars") + "");
+                        }
+                        UHC.PlayerData.put(attacker.getName() + ":Stars", CurrentStars + TrueStars);
+
+                        int Kills = 0;
+                        if (UHC.PlayerData.containsKey(attacker.getName() + ":Kills")){
+                            Kills = Integer.parseInt( UHC.PlayerData.get(attacker.getName() + ":Kills") + "");
+                        }
+                        UHC.PlayerData.put(attacker.getName() + ":Kills", Kills + 1);
+                    }
+                } else {
+
+                }
+            }
         }
 
         // ADD METHOD TO MESSAGE ALL PLAYERS THAT WERE PART OF THE KILLING
@@ -111,12 +148,20 @@ public class GameEvents implements Listener {
                         online.sendMessage(ChatColor.translateAlternateColorCodes('&', "              &9&lThe Winner is &6&o" + alive));
                         online.sendMessage(ChatColor.translateAlternateColorCodes('&', ""));
                     } else {
-                        online.sendMessage(ChatColor.translateAlternateColorCodes('&', "&c&oYou killed &e&o" + p.getName() + "&6&l +&e&o" + Stars + " &c&oStars.   &6&l" + PercentageDoneByYou + "&7&o%"));
+                        online.sendMessage(ChatColor.translateAlternateColorCodes('&', "&c&oYou killed &e&o" + p.getName() + "&6&l +&e&o" + TrueStars + " &c&oStars.   &6&l" + UHC.UTIL.round(percentByYou) + "&7&o%"));
                         online.sendMessage(ChatColor.translateAlternateColorCodes('&', ""));
                         online.sendMessage(ChatColor.translateAlternateColorCodes('&', "              &9&lYou won!"));
                         online.sendMessage(ChatColor.translateAlternateColorCodes('&', ""));
                     }
                 }
+                new BukkitRunnable() {
+
+                    @Override
+                    public  void run(){
+                        UHC.clearGame();
+                    }
+
+                }.runTaskLater(kz.khriz.uhcsun.UHC.getPlugin(UHC.class), (1 * 60) * 20);
             }
 
         }
@@ -124,9 +169,9 @@ public class GameEvents implements Listener {
         if (!CnclMsg){
             for (Player online : Bukkit.getOnlinePlayers()){
                 if (online.getName() == p.getKiller().getName()){
-                    online.sendMessage(ChatColor.translateAlternateColorCodes('&', "&c&oYou killed &e&o" + p.getName() + "&6&l +&e&o" + Stars + " &c&oStars.   &6&l" + PercentageDoneByYou + "&7&o%"));
+                    online.sendMessage(ChatColor.translateAlternateColorCodes('&', "&c&oYou killed &e&o" + p.getName() + "&6&l +&e&o" + TrueStars + " &c&oStars.   &6&l" + UHC.UTIL.round(percentByYou) + "&7&o%"));
                 } else {
-                    online.sendMessage(ChatColor.translateAlternateColorCodes('&', "&6&o" + p.getKiller() + " &c&okilled &e&o" + p.getName()));
+                    online.sendMessage(ChatColor.translateAlternateColorCodes('&', "&6&o" + p.getKiller().getName() + " &c&okilled &e&o" + p.getName()));
                 }
             }
             e.setDeathMessage("");
@@ -157,26 +202,25 @@ public class GameEvents implements Listener {
             e.setCancelled(true);
             return;
         }
-        if (UHC.Game.containsKey("NAME")){
+        if (UHC.Game.containsKey("GAME ID")){
+
             Player p = (Player) e.getEntity();
             Player a = (Player) e.getDamager();
 
-            Double amount = e.getDamage();
-            Double current = (double) 0;
+            Double amountDealt = e.getDamage();
+            Double currenDamageTotal = 0.0;
 
-            if (UHC.DamageMap.containsKey(p.getName() + " " + a.getName())){
-                current = UHC.DamageMap.get(p.getName() + " " + a.getName());
+            if (UHC.PlayerTAttackerDamage.containsKey(p.getName() + ":" + a.getName())){
+                currenDamageTotal = UHC.PlayerTAttackerDamage.get(p.getName() + ":" + a.getName());
             }
+            UHC.PlayerTAttackerDamage.put(p.getName() + ":" + a.getName(), currenDamageTotal + amountDealt);
 
-            UHC.DamageMap.put(p.getName() + " " + a.getName(), amount + current);
-
-            Double currentT = (double) 0;
-
-            if (UHC.DamageMap.containsKey(p.getName() + " " + a.getName())){
-                currentT = UHC.DamageTook.get(p.getName());
+            Double beforeTotalTook = 0.0;
+            if (UHC.TotalDamageTook.containsKey(p.getName())){
+                beforeTotalTook = UHC.TotalDamageTook.get(p.getName());
             }
+            UHC.TotalDamageTook.put(p.getName(), beforeTotalTook + amountDealt);
 
-            UHC.DamageTook.put(p.getName(), amount + currentT);
         }
     }
 }

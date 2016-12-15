@@ -6,19 +6,12 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-import net.md_5.bungee.api.*;
 import org.bukkit.*;
 import org.bukkit.ChatColor;
-import org.bukkit.block.*;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.generator.ChunkGenerator;
-
-import net.minecraft.server.v1_8_R1.Material;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.metadata.MetadataValue;
-import org.bukkit.plugin.Plugin;
 
 public class Utilities {
 
@@ -108,6 +101,20 @@ public class Utilities {
         }
         return finalID;
     }
+
+    // I do not claim this method.
+    public int round(double d){
+        double dAbs = Math.abs(d);
+        int i = (int) dAbs;
+        double result = dAbs - (double) i;
+        if(result<0.5){
+            return d<0 ? -i : i;
+        }else{
+            return d<0 ? -(i+1) : i+1;
+        }
+    }
+    // I found it here http://stackoverflow.com/questions/2654839/rounding-a-double-to-turn-it-into-an-int-java
+    // This is not mine.
 
     public ChunkGenerator getDefaultWorldGenerator(String worldName, String id) {
         return new UHCGenerator(UHC);

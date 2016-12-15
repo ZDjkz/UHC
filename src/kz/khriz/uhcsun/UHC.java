@@ -9,9 +9,11 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import net.md_5.bungee.api.ChatColor;
+import org.bukkit.scoreboard.Scoreboard;
 
 public class UHC extends JavaPlugin {
 
@@ -29,7 +31,7 @@ public class UHC extends JavaPlugin {
     public String PREFIX = ChatColor.translateAlternateColorCodes('&', "&c&lU&6&lH&e&lC &e&lS&6&lU&c&lN &f&o- ");
 
     public int Mins = 0;
-    public int Seconds = 30;
+    public int Seconds = 5;
 
     @Override
     public void onEnable() {
@@ -43,8 +45,8 @@ public class UHC extends JavaPlugin {
         Game.clear();
         clearGame();
         PlayerData.clear();
-        DamageMap.clear();
-        DamageTook.clear();
+        PlayerTAttackerDamage.clear();
+        TotalDamageTook.clear();
         userTPLocs.clear();
         recipeUseage.clear();
     }
@@ -72,8 +74,8 @@ public class UHC extends JavaPlugin {
     // DamageTook is the amount of damage a single player has took in total.
     HashMap<Object, Object> PlayerData = new HashMap<Object, Object>();
     HashMap<Object, Object> Game = new HashMap<Object, Object>();
-    HashMap<Object, Double> DamageMap = new HashMap<Object, Double>();
-    HashMap<Object, Double> DamageTook = new HashMap<Object, Double>();
+    HashMap<Object, Double> PlayerTAttackerDamage = new HashMap<Object, Double>();
+    HashMap<Object, Double> TotalDamageTook = new HashMap<Object, Double>();
     HashMap<Object, Location> userTPLocs = new HashMap<Object, Location>();
     HashMap<Object, Integer> recipeUseage = new HashMap<Object, Integer>();
 
@@ -103,8 +105,18 @@ public class UHC extends JavaPlugin {
 
     public void clearGame(){
         Game.clear();
+        PlayerData.clear();
+        PlayerTAttackerDamage.clear();
+        TotalDamageTook.clear();
+        userTPLocs.clear();
+        recipeUseage.clear();
         Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "mv delete UHC");
         Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "mvconfirm");
+
+        for (Player all : Bukkit.getOnlinePlayers()){
+            Scoreboard board = Bukkit.getScoreboardManager().getNewScoreboard();
+            all.setScoreboard(board);
+        }
     }
 
     final File ConfigYML = new File("plugins/UHC", "Config.yml");

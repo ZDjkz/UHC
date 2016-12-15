@@ -24,11 +24,7 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="187">
               <caret line="20" column="59" lean-forward="false" selection-start-line="20" selection-start-column="59" selection-end-line="20" selection-end-column="59" />
-              <folding>
-                <element signature="imports" expanded="false" />
-                <element signature="e#334#335#0" expanded="false" />
-                <element signature="e#364#365#0" expanded="false" />
-              </folding>
+              <folding />
             </state>
           </provider>
         </entry>
@@ -36,11 +32,12 @@
       <file leaf-file-name="UHC.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/kz/khriz/uhcsun/UHC.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="382">
-              <caret line="86" column="36" lean-forward="true" selection-start-line="86" selection-start-column="36" selection-end-line="86" selection-end-column="36" />
+            <state relative-caret-position="225">
+              <caret line="101" column="9" lean-forward="true" selection-start-line="101" selection-start-column="9" selection-end-line="101" selection-end-column="9" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#2985#3002#0" expanded="true" />
+                <element signature="e#2864#2880#0" expanded="true" />
+                <element signature="e#2941#2957#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -49,8 +46,8 @@
       <file leaf-file-name="PreGameEvents.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/kz/khriz/uhcsun/PreGameEvents.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="229">
-              <caret line="44" column="24" lean-forward="false" selection-start-line="44" selection-start-column="16" selection-end-line="44" selection-end-column="24" />
+            <state relative-caret-position="1012">
+              <caret line="75" column="30" lean-forward="false" selection-start-line="75" selection-start-column="20" selection-end-line="75" selection-end-column="30" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -61,9 +58,12 @@
       <file leaf-file-name="GameEvents.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/kz/khriz/uhcsun/GameEvents.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="348">
-              <caret line="65" column="33" lean-forward="true" selection-start-line="65" selection-start-column="33" selection-end-line="65" selection-end-column="33" />
-              <folding />
+            <state relative-caret-position="378">
+              <caret line="79" column="50" lean-forward="false" selection-start-line="79" selection-start-column="50" selection-end-line="79" selection-end-column="50" />
+              <folding>
+                <element signature="e#7455#7630#0" expanded="true" />
+                <element signature="e#7629#7630#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -71,8 +71,8 @@
       <file leaf-file-name="LobbyEvents.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/kz/khriz/uhcsun/LobbyEvents.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="41" column="42" lean-forward="true" selection-start-line="41" selection-start-column="42" selection-end-line="41" selection-end-column="42" />
+            <state relative-caret-position="17">
+              <caret line="41" column="42" lean-forward="false" selection-start-line="41" selection-start-column="42" selection-end-line="41" selection-end-column="42" />
               <folding />
             </state>
           </provider>
@@ -81,8 +81,8 @@
       <file leaf-file-name="UHCScoreboard.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/kz/khriz/uhcsun/UHCScoreboard.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-387">
-              <caret line="46" column="45" lean-forward="true" selection-start-line="46" selection-start-column="45" selection-end-line="46" selection-end-column="45" />
+            <state relative-caret-position="106">
+              <caret line="102" column="0" lean-forward="false" selection-start-line="102" selection-start-column="0" selection-end-line="127" selection-end-column="132" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -93,8 +93,8 @@
       <file leaf-file-name="UHCCommand.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/kz/khriz/uhcsun/UHCCommand.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="178">
-              <caret line="38" column="0" lean-forward="true" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
+            <state relative-caret-position="620">
+              <caret line="81" column="40" lean-forward="true" selection-start-line="81" selection-start-column="40" selection-end-line="81" selection-end-column="40" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -106,8 +106,11 @@
         <entry file="file://$PROJECT_DIR$/src/kz/khriz/uhcsun/UHCRecipes.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="153">
-              <caret line="11" column="0" lean-forward="true" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
-              <folding />
+              <caret line="11" column="0" lean-forward="false" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+              <folding>
+                <element signature="e#157#158#0" expanded="false" />
+                <element signature="e#187#188#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -115,11 +118,9 @@
       <file leaf-file-name="Utilities.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/kz/khriz/uhcsun/Utilities.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="137" column="69" lean-forward="false" selection-start-line="137" selection-start-column="69" selection-end-line="137" selection-end-column="69" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state relative-caret-position="-51">
+              <caret line="9" column="28" lean-forward="true" selection-start-line="9" selection-start-column="28" selection-end-line="9" selection-end-column="28" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -127,7 +128,7 @@
       <file leaf-file-name="UHCGenerator.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/kz/khriz/uhcsun/UHCGenerator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
+            <state relative-caret-position="85">
               <caret line="5" column="0" lean-forward="false" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
               <folding>
                 <element signature="e#376#377#0" expanded="false" />
@@ -136,7 +137,6 @@
                 <element signature="e#529#530#0" expanded="false" />
                 <element signature="e#612#613#0" expanded="false" />
                 <element signature="e#666#667#0" expanded="false" />
-                <element signature="e#673#705#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -179,7 +179,7 @@
     <setting file="file://$PROJECT_DIR$/src/kz/khriz/uhcsun/UHCGenerator.java" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/kz/khriz/uhcsun/UHCCommand.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/kz/khriz/uhcsun/PreGameEvents.java" root0="SKIP_INSPECTION" />
-    <setting file="file://$PROJECT_DIR$/src/kz/khriz/uhcsun/GameEvents.java" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/kz/khriz/uhcsun/GameEvents.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/kz/khriz/uhcsun/EndGameEvents.java" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/kz/khriz/uhcsun/FileRegistry.java" root0="SKIP_HIGHLIGHTING" />
   </component>
@@ -195,10 +195,10 @@
         <option value="$PROJECT_DIR$/src/kz/khriz/uhcsun/PreGameEvents.java" />
         <option value="$PROJECT_DIR$/src/kz/khriz/uhcsun/FileRegistry.java" />
         <option value="$PROJECT_DIR$/src/kz/khriz/uhcsun/EndGameEvents.java" />
-        <option value="$PROJECT_DIR$/src/kz/khriz/uhcsun/UHCScoreboard.java" />
         <option value="$PROJECT_DIR$/src/kz/khriz/uhcsun/LobbyEvents.java" />
-        <option value="$PROJECT_DIR$/src/kz/khriz/uhcsun/UHC.java" />
         <option value="$PROJECT_DIR$/src/kz/khriz/uhcsun/UHCCommand.java" />
+        <option value="$PROJECT_DIR$/src/kz/khriz/uhcsun/UHCScoreboard.java" />
+        <option value="$PROJECT_DIR$/src/kz/khriz/uhcsun/UHC.java" />
         <option value="$PROJECT_DIR$/src/kz/khriz/uhcsun/Utilities.java" />
         <option value="$PROJECT_DIR$/src/kz/khriz/uhcsun/GameEvents.java" />
       </list>
@@ -226,7 +226,6 @@
     </navigator>
     <panes>
       <pane id="PackagesPane" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -273,6 +272,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
       <pane id="Scratches" />
     </panes>
   </component>
@@ -512,13 +512,13 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="false" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32936078" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16359697" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.16359697" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -530,7 +530,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1076759" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.108742006" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -563,7 +563,8 @@
           <caret line="44" column="65" lean-forward="false" selection-start-line="44" selection-start-column="58" selection-end-line="44" selection-end-column="65" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#2985#3002#0" expanded="true" />
+            <element signature="e#2864#2880#0" expanded="true" />
+            <element signature="e#2941#2957#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -582,7 +583,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1496">
           <caret line="99" column="33" lean-forward="false" selection-start-line="99" selection-start-column="26" selection-end-line="99" selection-end-column="33" />
-          <folding />
+          <folding>
+            <element signature="e#7455#7630#0" expanded="true" />
+            <element signature="e#7629#7630#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -607,7 +611,6 @@
             <element signature="e#529#530#0" expanded="false" />
             <element signature="e#612#613#0" expanded="false" />
             <element signature="e#666#667#0" expanded="false" />
-            <element signature="e#673#705#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -616,9 +619,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -633,11 +634,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="187">
           <caret line="11" column="27" lean-forward="false" selection-start-line="11" selection-start-column="27" selection-end-line="11" selection-end-column="27" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#334#335#0" expanded="false" />
-            <element signature="e#364#365#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -647,7 +644,8 @@
           <caret line="64" column="0" lean-forward="true" selection-start-line="64" selection-start-column="0" selection-end-line="64" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#2985#3002#0" expanded="true" />
+            <element signature="e#2864#2880#0" expanded="true" />
+            <element signature="e#2941#2957#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -656,7 +654,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1581">
           <caret line="93" column="56" lean-forward="true" selection-start-line="93" selection-start-column="56" selection-end-line="93" selection-end-column="56" />
-          <folding />
+          <folding>
+            <element signature="e#7455#7630#0" expanded="true" />
+            <element signature="e#7629#7630#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -699,7 +700,6 @@
             <element signature="e#529#530#0" expanded="false" />
             <element signature="e#612#613#0" expanded="false" />
             <element signature="e#666#667#0" expanded="false" />
-            <element signature="e#673#705#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -708,9 +708,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3298">
           <caret line="200" column="70" lean-forward="false" selection-start-line="200" selection-start-column="70" selection-end-line="200" selection-end-column="70" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -726,11 +724,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="306">
           <caret line="18" column="41" lean-forward="true" selection-start-line="18" selection-start-column="41" selection-end-line="18" selection-end-column="41" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#334#335#0" expanded="false" />
-            <element signature="e#364#365#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -738,7 +732,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1173">
           <caret line="69" column="60" lean-forward="false" selection-start-line="69" selection-start-column="60" selection-end-line="69" selection-end-column="60" />
-          <folding />
+          <folding>
+            <element signature="e#7455#7630#0" expanded="true" />
+            <element signature="e#7629#7630#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -789,7 +786,6 @@
             <element signature="e#529#530#0" expanded="false" />
             <element signature="e#612#613#0" expanded="false" />
             <element signature="e#666#667#0" expanded="false" />
-            <element signature="e#673#705#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -798,9 +794,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="884">
           <caret line="72" column="5" lean-forward="true" selection-start-line="72" selection-start-column="5" selection-end-line="72" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -810,7 +804,8 @@
           <caret line="8" column="39" lean-forward="false" selection-start-line="8" selection-start-column="39" selection-end-line="8" selection-end-column="39" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#2985#3002#0" expanded="true" />
+            <element signature="e#2864#2880#0" expanded="true" />
+            <element signature="e#2941#2957#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -835,11 +830,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
           <caret line="7" column="55" lean-forward="false" selection-start-line="7" selection-start-column="55" selection-end-line="7" selection-end-column="55" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#334#335#0" expanded="false" />
-            <element signature="e#364#365#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -847,7 +838,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1122">
           <caret line="77" column="57" lean-forward="false" selection-start-line="77" selection-start-column="33" selection-end-line="77" selection-end-column="57" />
-          <folding />
+          <folding>
+            <element signature="e#7455#7630#0" expanded="true" />
+            <element signature="e#7629#7630#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -890,7 +884,6 @@
             <element signature="e#529#530#0" expanded="false" />
             <element signature="e#612#613#0" expanded="false" />
             <element signature="e#666#667#0" expanded="false" />
-            <element signature="e#673#705#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -899,9 +892,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2142">
           <caret line="146" column="47" lean-forward="true" selection-start-line="146" selection-start-column="47" selection-end-line="146" selection-end-column="47" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -939,7 +930,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/kz/khriz/uhcsun/UHCGenerator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
+        <state relative-caret-position="85">
           <caret line="5" column="0" lean-forward="false" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
           <folding>
             <element signature="e#376#377#0" expanded="false" />
@@ -948,15 +939,33 @@
             <element signature="e#529#530#0" expanded="false" />
             <element signature="e#612#613#0" expanded="false" />
             <element signature="e#666#667#0" expanded="false" />
-            <element signature="e#673#705#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/kz/khriz/uhcsun/UHCRecipes.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="11" column="0" lean-forward="false" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+          <folding>
+            <element signature="e#157#158#0" expanded="false" />
+            <element signature="e#187#188#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/kz/khriz/uhcsun/LobbyEvents.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="41" column="42" lean-forward="false" selection-start-line="41" selection-start-column="42" selection-end-line="41" selection-end-column="42" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/kz/khriz/uhcsun/PreGameEvents.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="229">
-          <caret line="44" column="24" lean-forward="false" selection-start-line="44" selection-start-column="16" selection-end-line="44" selection-end-column="24" />
+        <state relative-caret-position="1012">
+          <caret line="75" column="30" lean-forward="false" selection-start-line="75" selection-start-column="20" selection-end-line="75" selection-end-column="30" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -967,76 +976,58 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="187">
           <caret line="20" column="59" lean-forward="false" selection-start-line="20" selection-start-column="59" selection-end-line="20" selection-end-column="59" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#334#335#0" expanded="false" />
-            <element signature="e#364#365#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/kz/khriz/uhcsun/UHC.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="382">
-          <caret line="86" column="36" lean-forward="true" selection-start-line="86" selection-start-column="36" selection-end-line="86" selection-end-column="36" />
+        <state relative-caret-position="225">
+          <caret line="101" column="9" lean-forward="true" selection-start-line="101" selection-start-column="9" selection-end-line="101" selection-end-column="9" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#2985#3002#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/kz/khriz/uhcsun/Utilities.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="137" column="69" lean-forward="false" selection-start-line="137" selection-start-column="69" selection-end-line="137" selection-end-column="69" />
-          <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#2864#2880#0" expanded="true" />
+            <element signature="e#2941#2957#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/kz/khriz/uhcsun/UHCCommand.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="178">
-          <caret line="38" column="0" lean-forward="true" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
+        <state relative-caret-position="620">
+          <caret line="81" column="40" lean-forward="true" selection-start-line="81" selection-start-column="40" selection-end-line="81" selection-end-column="40" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/kz/khriz/uhcsun/UHCRecipes.java">
+    <entry file="file://$PROJECT_DIR$/src/kz/khriz/uhcsun/Utilities.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="11" column="0" lean-forward="true" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+        <state relative-caret-position="-51">
+          <caret line="9" column="28" lean-forward="true" selection-start-line="9" selection-start-column="28" selection-end-line="9" selection-end-column="28" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/kz/khriz/uhcsun/UHCScoreboard.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-387">
-          <caret line="46" column="45" lean-forward="true" selection-start-line="46" selection-start-column="45" selection-end-line="46" selection-end-column="45" />
+        <state relative-caret-position="106">
+          <caret line="102" column="0" lean-forward="false" selection-start-line="102" selection-start-column="0" selection-end-line="127" selection-end-column="132" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/kz/khriz/uhcsun/LobbyEvents.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="41" column="42" lean-forward="true" selection-start-line="41" selection-start-column="42" selection-end-line="41" selection-end-column="42" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/kz/khriz/uhcsun/GameEvents.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="348">
-          <caret line="65" column="33" lean-forward="true" selection-start-line="65" selection-start-column="33" selection-end-line="65" selection-end-column="33" />
-          <folding />
+        <state relative-caret-position="378">
+          <caret line="79" column="50" lean-forward="false" selection-start-line="79" selection-start-column="50" selection-end-line="79" selection-end-column="50" />
+          <folding>
+            <element signature="e#7455#7630#0" expanded="true" />
+            <element signature="e#7629#7630#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

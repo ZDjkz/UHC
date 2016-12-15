@@ -41,10 +41,10 @@ public class UHCScoreboard implements Listener {
         kills.setSuffix(ChatColor.RED + "0");
         obj.getScore(ChatColor.GREEN.toString()).setScore(2);
 
-        Team coins = Board.registerNewTeam("stars");
-        coins.addEntry(ChatColor.LIGHT_PURPLE.toString());
-        coins.setPrefix(ChatColor.translateAlternateColorCodes('&', "&6&oStars &7> "));
-        coins.setSuffix(ChatColor.RED + "0");
+        Team stars = Board.registerNewTeam("stars");
+        stars.addEntry(ChatColor.LIGHT_PURPLE.toString());
+        stars.setPrefix(ChatColor.translateAlternateColorCodes('&', "&6&oStars &7> "));
+        stars.setSuffix(ChatColor.RED + "0");
         obj.getScore(ChatColor.LIGHT_PURPLE.toString()).setScore(3);
 
         Team emptyLine2 = Board.registerNewTeam("eLineTwo");
@@ -99,6 +99,33 @@ public class UHCScoreboard implements Listener {
             }
 
         }.runTaskTimer(kz.khriz.uhcsun.UHC.getPlugin(UHC.class), 20 + 20*10, 20);
+
+        new BukkitRunnable() {
+
+            Object Kills;
+            Object Stars;
+
+            @Override
+            public  void run(){
+                if (UHC.PlayerData.containsKey(p.getName() + ":Kills")){
+                    Kills = UHC.PlayerData.get(p.getName() + ":Kills");
+                }
+                if (UHC.PlayerData.containsKey(p.getName() + ":Stars")){
+                    Stars = UHC.PlayerData.get(p.getName() + ":Stars");
+                }
+
+                if (Kills == null){
+                    Kills = 0;
+                }
+                if (Stars == null){
+                    Stars = 0;
+                }
+
+                kills.setSuffix(ChatColor.RED + Kills.toString());
+                stars.setSuffix(ChatColor.RED + Stars.toString());
+            }
+
+        }.runTaskTimer(kz.khriz.uhcsun.UHC.getPlugin(UHC.class), 20 + 20*10 + (UHC.Seconds * 20) + ((60 * UHC.Mins) * 20) - 20, 20);
 
     }
 
